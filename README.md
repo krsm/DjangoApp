@@ -1,2 +1,0 @@
-# DjangoApp
-Simple django app
