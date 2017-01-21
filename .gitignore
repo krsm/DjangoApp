@@ -95,3 +95,6 @@ ENV/
 .pyc
 
 
+#database sqlite
+.db
+.sqlite3

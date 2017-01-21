@@ -31,6 +31,9 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    # custom apps
+    'music.apps.MusicConfig',
+    # ------
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
