@@ -20,5 +20,6 @@ from django.conf.urls import include
 urlpatterns = [
     # route related to admin
     url(r'^admin/', admin.site.urls),
+    # to incluse music urls
     url(r'^music/', include('music.urls')),
 ]
