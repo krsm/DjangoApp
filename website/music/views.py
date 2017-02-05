@@ -1,4 +1,7 @@
-from django.http import HttpResponse
+# to raise 404 HTTP Error
+from django.http import Http404
+
+# from django.http import HttpResponse # replaced by render
 # # to work with templates
 # from django.template import loader
 # to combine load and render template
@@ -17,4 +20,11 @@ def index(request):
 
 # details view
 def detail(request, album_id):
-    return HttpResponse('<h2>Details for Album id: ' + str(album_id) + '</h2>')
+   # query database to verify id
+    try:
+        # pk is primary key, it could be id
+        album = Album.objects.get(pk=album_id)
+    except Album.DoesNotExist:
+        raise Http404("Album does not exist")
+    return render(request, 'music/detail.html', {'album': album})
+
