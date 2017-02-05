@@ -1,19 +1,18 @@
 from django.http import HttpResponse
-# to work with templates
-from django.template import loader
+# # to work with templates
+# from django.template import loader
+# to combine load and render template
+from django.shortcuts import render
 
 from .models import Album
 
 
 # homepage
 def index(request):
-    # connect to datbase and parse data
+    # connect to database and parse data
     all_albums = Album.objects.all()
-    template = loader.get_template('music/index.html')
-    context = {
-            'all_albums': all_albums,
-    }
-    return HttpResponse(template.render(context, request))
+    context = {'all_albums': all_albums}
+    return render(request, 'music/index.html', context)
 
 
 # details view
