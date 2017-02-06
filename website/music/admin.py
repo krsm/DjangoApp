@@ -6,3 +6,4 @@ from .models import Album, Song
 
 # registering the class Album to be edited by Admin
 admin.site.register(Album)
+admin.site.register(Song)
