@@ -16,6 +16,9 @@ Including another URLconf
 from django.conf.urls import url
 from .import views
 
+# variable to store app name - related to namespace
+
+app_name = 'music'  # has to receive the name of app
 
 # regular expression
 # start with ^
