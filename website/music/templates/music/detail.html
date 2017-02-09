@@ -1,11 +1,32 @@
-<img src⁼ "{{album.algum_logo}}">
+<!--<img src⁼"{{ album.album_logo }}">-->
 
-<h1>"{{album.algum_title}}"</h1>
-<h3>"{{album.artist}}"</h3>
+<h1>"{{album.album_title}}"</h1>
+<h2>"{{album.artist}}"</h2>
+
+<!--Error msg-->
+{% if error_message %}
+    <p><strong>{{ error_message }}</strong></p>
+{% endif %}
+
+<!--form-->
+
+<form action= "{% url 'music:favorite' album.id %}" method="post">
+    <!--for safety reasons-->
+    {% csrf_token %}
+    {% for song in album.song_set.all %}
+    <input type="radio" id="song{{forloop.counter}}" name="song" value="{{song.id}}"/>
+    <label for="song{{forloop.counter}}">
+        {{ song.song_title }}
+        <!--star-->
+        {% if song.is_favorite %}
+        <img src="http://imgur.com/b9b13Rd.png">
+        {% endif %}
+    </label><br>
+    {% endfor %}
+    <input type="submit" value="Favorite">
+
+</form>
 
 
-<ul>
-  {% for song in album.song_set.all %}
-    <li>{{song.song_title}} - {{song.file_type}} </li>
-  {% endfor %}
-</ul>
+<!--http://imgur.com/b9b13Rd.png-->
+

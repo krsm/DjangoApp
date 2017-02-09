@@ -27,9 +27,12 @@ urlpatterns = [
     # route related music
     url(r'^$', views.index, name='index'),
 
-    # /music/id/
+    # /music/<alum_id>/
     # /music/71/
     # () to create a group, to see 71 as a group, for instance
     url(r'^(?P<album_id>[0-9]+)/$', views.detail, name='detail'),
+
+    # /music/<alum_id>/favorite
+    url(r'^(?P<album_id>[0-9]+)/favorite/$', views.favorite, name='favorite'),
 
 ]

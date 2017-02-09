@@ -8,7 +8,7 @@
 from django.shortcuts import render
 from django.shortcuts import get_object_or_404
 
-from .models import Album
+from .models import Album, Song
 
 
 # homepage
@@ -30,3 +30,20 @@ def detail(request, album_id):
     album = get_object_or_404(Album, pk=album_id)  # replace try, except statement
 
     return render(request, 'music/detail.html', {'album': album})
+
+
+# favorite
+def favorite(request, album_id):
+    album = get_object_or_404(Album, pk=album_id)  # replace try, except statement
+    try:
+        select_song = album.song_set.get(pk=request.POST['song'])
+    except (KeyError, Song.DoesNotExist):
+        return render(request, 'music/detail.html', {
+
+            'album': album,
+            'error_message': 'You did not select a valid song',
+        })
+    else:
+        select_song.is_favorite = True
+        select_song.save()  # to save changes to database
+        return render(request, 'music/detail.html', {'album': album})
